@@ -108,17 +108,28 @@ export default function Contact() {
           </Link>
         </div>
 
-        <div className="border border-bronze/30 aspect-square md:aspect-auto md:h-full relative overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800&q=80&auto=format&fit=crop"
-            alt="Ciata City Mall studio location"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-ink/50 flex items-center justify-center p-8 text-center">
-            <p className="font-script italic text-2xl text-gold-bright">
-              Ciata City Mall, Ridgeways &mdash; map coming soon
-            </p>
+        <div className="relative">
+          <div className="aspect-square md:aspect-auto md:h-full overflow-hidden foil-frame">
+            <iframe
+              title="Infinite Glow Hair Studio location — Ciata City Mall, Ridgeways"
+              src="https://www.google.com/maps?q=Ciata+City+Mall,+Ridgeways,+Nairobi,+Kenya&output=embed"
+              className="w-full h-full grayscale contrast-125 opacity-90"
+              style={{ border: 0, minHeight: 320 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Ciata+City+Mall+Ridgeways+Nairobi"
+            target="_blank"
+            rel="noreferrer"
+            className="absolute bottom-4 left-4 glass rounded-full px-5 py-2.5 text-xs tracking-[0.15em] uppercase text-gold-bright hover:border-gold transition-colors inline-flex items-center gap-2"
+          >
+            Get directions
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M7 17L17 7M17 7H9M17 7v8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
         </div>
       </div>
     </div>
