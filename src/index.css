@@ -211,3 +211,111 @@ body {
   .animate-spin-slow { animation: none; }
   .shine-sweep::after { transition: none; left: -75%; }
 }
+
+/* Subtle film-grain texture for material richness, luxury print feel */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Refined gold double-border frame for a couture feel */
+.foil-frame {
+  position: relative;
+  border: 1px solid rgba(201, 162, 75, 0.5);
+}
+.foil-frame::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(201, 162, 75, 0.25);
+  pointer-events: none;
+}
+
+/* Subtle film-grain texture for material richness, luxury print feel */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Refined gold double-border frame for a couture feel */
+.foil-frame {
+  position: relative;
+  border: 1px solid rgba(201, 162, 75, 0.5);
+}
+.foil-frame::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(201, 162, 75, 0.25);
+  pointer-events: none;
+}
+
+/* ============================================
+   Living gold mesh gradient — the main visual
+   engine of the redesign, zero image dependency
+   ============================================ */
+.mesh-bg {
+  position: relative;
+  background:
+    radial-gradient(ellipse 800px 600px at 15% 20%, rgba(201,162,75,0.28), transparent 60%),
+    radial-gradient(ellipse 700px 700px at 85% 15%, rgba(232,205,132,0.20), transparent 55%),
+    radial-gradient(ellipse 900px 800px at 50% 100%, rgba(122,102,64,0.30), transparent 60%),
+    radial-gradient(ellipse 600px 600px at 90% 80%, rgba(201,162,75,0.15), transparent 55%),
+    #0d0b09;
+  background-size: 180% 180%;
+  animation: meshDrift 22s ease-in-out infinite alternate;
+}
+@keyframes meshDrift {
+  0%   { background-position: 0% 0%, 100% 0%, 50% 100%, 100% 100%; }
+  100% { background-position: 10% 10%, 90% 15%, 45% 90%, 85% 90%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mesh-bg { animation: none; }
+}
+
+/* Rotating dashed ring — decorative, no image needed */
+.ring-deco {
+  border: 1px dashed rgba(201,162,75,0.35);
+  border-radius: 9999px;
+  animation: spin-slow 30s linear infinite;
+}
+
+/* Large decorative serif glyph, sits behind content as texture */
+.ghost-glyph {
+  font-family: var(--font-display);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(201,162,75,0.18);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Kinetic underline that draws itself in on reveal */
+.draw-line {
+  position: relative;
+  display: inline-block;
+}
+.draw-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-gold), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: drawLine 1.2s ease-out 0.6s forwards;
+}
+@keyframes drawLine {
+  to { transform: scaleX(1); }
+}

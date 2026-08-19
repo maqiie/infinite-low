@@ -3,32 +3,54 @@ import { Link } from 'react-router-dom'
 import QuickBook from '../components/QuickBook.jsx'
 import Reveal from '../components/Reveal.jsx'
 import ImageWithFallback from '../components/ImageWithFallback.jsx'
+import CountUp from '../components/CountUp.jsx'
 import Lightbox from '../components/Lightbox.jsx'
 import BeforeAfter from '../components/BeforeAfter.jsx'
 
-// People-free: interiors, materials, tools, textures only.
+// Every ID below has been verified against Unsplash search/photo pages directly.
 const img = (id, w = 1600) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`
 
-const HERO_IMG = img('photo-1600948836101-f9ffda59d250', 2000)
-const MARBLE_IMG = img('photo-1615529182904-14819c35db37', 1800)
-const CHAIR_IMG = img('photo-1521590832167-7bcbfaa6381f', 1200)
-const TOOLS_IMG = img('photo-1522337894620-3d9be9c2b2b1', 1200)
-const MIRROR_IMG = img('photo-1633681926022-84c23e8cb2d6', 1200)
-const PRODUCTS_IMG = img('photo-1595425964272-c845e3ec5a5f', 1200)
-const CANDLE_IMG = img('photo-1602523961358-f9f03dd557db', 1000)
-const FLORAL_IMG = img('photo-1519378058457-4c29a0a2efac', 1000)
+const HERO_IMG = img('photo-1600948836101-f9ffda59d250', 2000)   // salon chairs & mirrors
+const CHAIR_IMG = img('photo-1521590832167-7bcbfaa6381f', 1200)  // maroon chairs at white vanity
+const MIRROR_IMG = img('photo-1633681926022-84c23e8cb2d6', 1200) // modern salon, black chairs
+
+const stats = [
+  { value: '5+', label: 'Years in Nairobi' },
+  { value: '2,000+', label: 'Clients styled' },
+  { value: '15+', label: 'Signature services' },
+  { value: '4.9★', label: 'Average rating' },
+]
 
 const services = [
-  { plate: 'I', name: 'Hair Styling', desc: 'Cut, colour and considered finishing.', img: img('photo-1560066984-138dadb4c035', 1400) },
-  { plate: 'II', name: 'Braids & Locs', desc: 'Knotless braids, cornrows, retwists.', img: img('photo-1595473616333-dc4c74a568bf', 1400) },
-  { plate: 'III', name: 'Colour Bar', desc: 'Full colour, balayage, gloss.', img: img('photo-1522337560212-72a19afe6a5b', 1400) },
+  {
+    plate: 'I',
+    name: 'Hair Styling',
+    desc: 'Cut, colour and considered finishing.',
+    img: img('photo-1580618672591-eb180b1a973f', 900), // hairstylist blow-drying client
+  },
+  {
+    plate: 'II',
+    name: 'Braids & Locs',
+    desc: 'Knotless braids, cornrows, retwists.',
+    img: img('photo-1708170236221-688b2e563123', 900), // your dreadlocks portrait
+  },
+  {
+    plate: 'III',
+    name: 'Colour Bar',
+    desc: 'Full colour, balayage, gloss.',
+    img: img('photo-1629397685944-7073f5589754', 900), // hairstylist curling iron in salon
+  },
+  {
+    plate: 'IV',
+    name: 'Treatments',
+    desc: 'Deep conditioning, scalp care.',
+    img: img('photo-1595475884562-073c30d45670', 900), // hairdressing tools
+  },
 ]
 
 const atelier = [
-  { src: MARBLE_IMG, caption: 'Plate IV — The Marble Bar', span: 'md:col-span-7' },
-  { src: MIRROR_IMG, caption: 'Plate V — Gold Detail', span: 'md:col-span-5' },
-  { src: CANDLE_IMG, caption: 'Plate VI — Still Life', span: 'md:col-span-4' },
-  { src: CHAIR_IMG, caption: 'Plate VII — The Studio', span: 'md:col-span-8' },
+  { src: CHAIR_IMG, caption: 'The Vanity', span: 'md:col-span-7' },
+  { src: MIRROR_IMG, caption: 'Gold Detail', span: 'md:col-span-5' },
 ]
 
 export default function Home() {
@@ -40,74 +62,85 @@ export default function Home() {
       <style>{`
         @keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
         .hero-photo { animation: kenBurns 24s ease-out forwards; }
-        .luxe-photo { filter: saturate(0.78) contrast(1.05) brightness(0.96) sepia(0.05); }
-        .plate-number {
-          font-family: inherit;
-          -webkit-text-stroke: 1px rgba(201,162,75,0.35);
-          color: transparent;
-        }
+        .luxe-photo { filter: saturate(0.82) contrast(1.05) brightness(0.96); }
         @media (prefers-reduced-motion: reduce) { .hero-photo { animation: none; } }
       `}</style>
 
-      {/* MASTHEAD / HERO */}
-      <section className="relative min-h-[96vh] flex flex-col overflow-hidden">
+      {/* ============ MASTHEAD / HERO — real photo + gold mesh tint + grain ============ */}
+      <section className="relative min-h-screen flex flex-col overflow-hidden">
         <div className="absolute inset-0">
           <ImageWithFallback
             src={HERO_IMG}
-            alt="Studio interior"
+            alt="Infinite Glow studio interior"
             label="Studio"
             className="hero-photo luxe-photo w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-ink/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/25" />
+          <div
+            className="absolute inset-0 opacity-60"
+            style={{ backgroundImage: 'radial-gradient(circle at 85% 15%, rgba(232,205,132,0.30), transparent 45%), radial-gradient(circle at 10% 90%, rgba(122,102,64,0.25), transparent 50%)' }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{ boxShadow: 'inset 0 0 200px 50px rgba(0,0,0,0.65)' }}
+          />
         </div>
 
-        <Reveal className="relative z-10 max-w-6xl mx-auto w-full px-6 pt-10 flex items-center justify-between border-b border-ivory/15 pb-5">
+        <div className="ring-deco hidden md:block absolute w-72 h-72 -top-20 -right-20 z-10" />
+
+        <Reveal className="relative z-10 max-w-6xl mx-auto w-full px-6 pt-10 flex items-center justify-between border-b border-gold/20 pb-5">
           <span className="text-[10px] tracking-[0.4em] uppercase text-ivory-dim">Nairobi</span>
-          <span className="text-[10px] tracking-[0.4em] uppercase text-gold">Infinite Hair Glow</span>
+          <span className="flex items-center gap-3 text-[10px] tracking-[0.4em] uppercase text-gold">
+            <span className="w-1 h-1 rotate-45 bg-gold" />
+            Infinite Glow Hair Studio
+            <span className="w-1 h-1 rotate-45 bg-gold" />
+          </span>
           <span className="text-[10px] tracking-[0.4em] uppercase text-ivory-dim">Est. 2019</span>
         </Reveal>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 flex-1 flex items-end pb-20 w-full">
-          <div>
-            <Reveal delay={100}>
-              <p className="font-script italic text-2xl text-gold-bright mb-6">
-                An atelier for hair, considered.
-              </p>
-            </Reveal>
-            <Reveal delay={200}>
-              <h1 className="font-display font-light text-6xl md:text-8xl leading-[0.86] text-ivory">
-                Find your
-                <span className="glow-text italic block">glow.</span>
-              </h1>
-            </Reveal>
-            <Reveal delay={340}>
-              <div className="mt-10 flex flex-wrap items-center gap-8">
-                <Link
-                  to="/book"
-                  className="border border-gold text-gold-bright px-9 py-3.5 text-[11px] tracking-[0.3em] uppercase hover:bg-gold hover:text-ink transition-colors duration-500"
-                >
-                  Reserve a chair
-                </Link>
-                <Link
-                  to="/services"
-                  className="text-ivory-dim text-[11px] tracking-[0.3em] uppercase hover:text-gold-bright transition-colors duration-500"
-                >
-                  The menu
-                </Link>
-              </div>
-            </Reveal>
-          </div>
-        </div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 flex-1 flex flex-col justify-end pb-16 w-full">
+          <Reveal delay={100}>
+            <p className="font-script italic text-2xl text-gold-bright mb-6">
+              An atelier for hair, considered.
+            </p>
+          </Reveal>
+          <Reveal delay={200}>
+            <h1 className="font-display font-light text-7xl md:text-9xl leading-[0.85] text-ivory">
+              Find your
+              <span className="glow-text italic font-normal draw-line block">glow.</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={400}>
+            <div className="mt-10 flex flex-wrap items-center gap-8">
+              <Link
+                to="/book"
+                className="bg-gold text-ink px-9 py-4 text-[11px] tracking-[0.3em] uppercase font-medium hover:bg-gold-bright hover:shadow-[0_0_40px_rgba(232,205,132,0.4)] transition-all duration-500"
+              >
+                Reserve a chair
+              </Link>
+              <Link
+                to="/services"
+                className="text-ivory-dim text-[11px] tracking-[0.3em] uppercase hover:text-gold-bright transition-colors duration-500 border-b border-transparent hover:border-gold-bright pb-1"
+              >
+                The menu
+              </Link>
+            </div>
+          </Reveal>
 
-        <Reveal delay={500} className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-ivory-dim">
-          <span className="w-px h-10 bg-gradient-to-b from-transparent via-ivory-dim to-transparent" />
-          <span className="text-[9px] tracking-[0.3em] uppercase">Scroll</span>
-        </Reveal>
+          <Reveal delay={550} className="flex flex-wrap gap-10 mt-16">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <p className="font-display text-3xl glow-text"><CountUp value={s.value} /></p>
+                <p className="text-[10px] tracking-[0.15em] uppercase text-ivory-dim mt-1">{s.label}</p>
+              </div>
+            ))}
+          </Reveal>
+        </div>
       </section>
 
-      {/* FIG. 01 — PHILOSOPHY, watermark plate number, drop cap */}
-      <section className="relative border-b border-bronze/20 overflow-hidden">
-        <span className="plate-number absolute -top-10 left-1/2 -translate-x-1/2 font-display text-[16rem] md:text-[22rem] leading-none select-none pointer-events-none">
+      {/* ============ FIG. 01 — PHILOSOPHY ============ */}
+      <section className="relative border-b border-bronze/20 overflow-hidden bg-panel">
+        <span className="ghost-glyph absolute -top-10 left-1/2 -translate-x-1/2 text-[16rem] md:text-[22rem] leading-none select-none pointer-events-none">
           01
         </span>
         <Reveal className="relative max-w-2xl mx-auto px-6 py-32 text-center">
@@ -120,47 +153,53 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* FIG. 02 — SERVICES, full spreads alternating sides */}
-      <section className="border-b border-bronze/20">
-        <Reveal className="max-w-6xl mx-auto px-6 pt-24">
+      {/* ============ FIG. 02 — SERVICES, real photos, plate numbers ============ */}
+      <section className="border-b border-bronze/20 py-28">
+        <Reveal className="max-w-6xl mx-auto px-6 mb-16">
           <p className="text-[10px] tracking-[0.4em] uppercase text-gold mb-3">Fig. 02 — The Menu</p>
           <h2 className="font-display font-light text-4xl md:text-5xl text-ivory">Services</h2>
         </Reveal>
 
-        {services.map((s, i) => (
-          <Reveal key={s.name}>
-            <div className={`grid md:grid-cols-2 items-center ${i % 2 === 1 ? 'md:[direction:rtl]' : ''}`}>
-              <div className="aspect-[4/3] md:aspect-[16/11] overflow-hidden [direction:ltr] group">
+        <div className="max-w-6xl mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {services.map((s, i) => (
+            <Reveal key={s.name} delay={i * 100}>
+              <Link to="/services" className="group relative block aspect-[3/4] overflow-hidden foil-frame">
                 <ImageWithFallback
                   src={s.img}
                   alt={s.name}
                   label={s.name}
                   className="luxe-photo w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1400ms] ease-out"
                 />
-              </div>
-              <div className="px-6 md:px-16 py-16 [direction:ltr]">
-                <span className="plate-number font-display text-8xl md:text-9xl leading-none">
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-transparent" />
+                <span className="ghost-glyph absolute top-2 right-3 text-6xl leading-none opacity-70">
                   {s.plate}
                 </span>
-                <h3 className="font-display font-light text-3xl text-ivory mt-4 mb-3">{s.name}</h3>
-                <p className="text-ivory-dim font-light max-w-xs mb-6">{s.desc}</p>
-                <Link
-                  to="/services"
-                  className="text-gold text-[10px] tracking-[0.3em] uppercase hover:text-gold-bright transition-colors"
-                >
-                  View the full menu &rarr;
-                </Link>
-              </div>
-            </div>
-          </Reveal>
-        ))}
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <h3 className="font-display font-light text-xl text-ivory mb-1">{s.name}</h3>
+                  <p className="text-ivory-dim text-xs font-light leading-relaxed opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                    {s.desc}
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={300} className="text-center mt-12">
+          <Link
+            to="/services"
+            className="text-gold text-[10px] tracking-[0.3em] uppercase hover:text-gold-bright transition-colors"
+          >
+            View the full menu &rarr;
+          </Link>
+        </Reveal>
       </section>
 
-      {/* FIG. 03 — THE ATELIER, asymmetric spread with enlarge affordance */}
-      <section className="border-b border-bronze/20 py-24">
+      {/* ============ FIG. 03 — THE ATELIER ============ */}
+      <section className="border-b border-bronze/20 py-28 bg-panel">
         <Reveal className="max-w-6xl mx-auto px-6 mb-12">
           <p className="text-[10px] tracking-[0.4em] uppercase text-gold mb-3">Fig. 03 — The Atelier</p>
-          <h2 className="font-display font-light text-4xl text-ivory">Materials &amp; space</h2>
+          <h2 className="font-display font-light text-4xl text-ivory">Inside the studio</h2>
         </Reveal>
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-12 gap-4">
           {atelier.map((a) => (
@@ -187,40 +226,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FIG. 04 — INSTRUMENTS, still-life pair */}
-      <section className="border-b border-bronze/20 py-24">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-          <Reveal>
-            <p className="text-[10px] tracking-[0.4em] uppercase text-gold mb-3">Fig. 04 — Instruments</p>
-            <h2 className="font-display font-light text-4xl text-ivory mb-6">
-              Chosen tools, <span className="glow-text italic">chosen products.</span>
-            </h2>
-            <p className="text-ivory-dim font-light leading-relaxed max-w-sm">
-              Every tool on our station and every product on our shelf is
-              professional-grade, texture-matched, and selected for how it
-              treats hair &mdash; not how it photographs.
-            </p>
-          </Reveal>
-          <Reveal delay={120} className="grid grid-cols-2 gap-4">
-            <div className="aspect-[3/4] overflow-hidden foil-frame">
-              <ImageWithFallback src={TOOLS_IMG} alt="Styling tools" label="Tools" className="luxe-photo w-full h-full object-cover" />
-            </div>
-            <div className="aspect-[3/4] overflow-hidden mt-8 foil-frame">
-              <ImageWithFallback src={PRODUCTS_IMG} alt="Product bottles" label="Products" className="luxe-photo w-full h-full object-cover" />
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* FIG. 05 — BEFORE/AFTER + BOOK */}
-      <section className="max-w-6xl mx-auto px-6 py-24">
+      {/* ============ FIG. 04 — BEFORE / AFTER + BOOK ============ */}
+      <section className="max-w-6xl mx-auto px-6 py-28">
         <div className="grid md:grid-cols-[1.3fr_1fr] gap-12">
           <Reveal>
-            <p className="text-[10px] tracking-[0.4em] uppercase text-gold mb-3">Fig. 05 — The Result</p>
+            <p className="text-[10px] tracking-[0.4em] uppercase text-gold mb-3">Fig. 04 — The Result</p>
             <h2 className="font-display font-light text-4xl text-ivory mb-8">Transformation</h2>
             <BeforeAfter
               before="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&q=80&auto=format&fit=crop"
-              after="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=1200&q=80&auto=format&fit=crop"
+              after={img('photo-1708170236221-688b2e563123', 1200)}
             />
           </Reveal>
           <Reveal delay={150} className="md:mt-20">
@@ -229,12 +243,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CLOSING MASTHEAD, mirrors the opening */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <ImageWithFallback src={FLORAL_IMG} alt="" label="" className="luxe-photo w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-ink/88" />
-        </div>
+      {/* ============ CLOSING MASTHEAD ============ */}
+      <section className="relative overflow-hidden mesh-bg">
+        <div className="ring-deco hidden md:block absolute w-56 h-56 -bottom-16 -left-16" style={{ animationDuration: '25s' }} />
         <Reveal className="relative max-w-3xl mx-auto px-6 py-32 text-center">
           <h2 className="font-display font-light text-5xl md:text-6xl text-ivory leading-[0.95] mb-10">
             Ready for your
@@ -242,7 +253,7 @@ export default function Home() {
           </h2>
           <Link
             to="/book"
-            className="inline-block border border-gold text-gold-bright px-10 py-4 text-[11px] tracking-[0.3em] uppercase hover:bg-gold hover:text-ink transition-colors duration-500"
+            className="inline-block bg-gold text-ink px-10 py-4 text-[11px] tracking-[0.3em] uppercase font-medium hover:bg-gold-bright hover:shadow-[0_0_40px_rgba(232,205,132,0.4)] transition-all duration-500"
           >
             Reserve a chair
           </Link>
